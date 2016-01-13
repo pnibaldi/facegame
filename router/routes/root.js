@@ -3,6 +3,5 @@ module.exports = function(app) {
     console.log("Received request");
     res.send('Hello world!');
   }
-
   app.get('/', callback);
 };

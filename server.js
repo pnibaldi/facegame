@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
-  console.log('Connected to DB', mongoose);
+  console.log('Connected to DB');
 });
 
 // configure app to use bodyParser()
@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-var files = glob.sync('./routes/*.js');
+var files = glob.sync('./router/routes/*.js');
 _.each(files, function(file) {
   require(file)(app);
 });
