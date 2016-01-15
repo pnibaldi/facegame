@@ -1,15 +1,17 @@
 module.exports = function(app) {
-  var addUser = function(req, res) {
-    console.log("Received request");
-    res.send('Hello world!');
+  var mongoose = require('mongoose'),
+    User = mongoose.model('user');
+
+  var getProfiles = function(req, res) {
+    User.find({}, function(err, users) {
+      if (err) {
+        res.status(401).send({
+          message: 'Error while retrieving profiles'
+        });
+      }
+      res.send(users);
+    });
   };
 
-  var getUser = function(req, res) {
-    
-    res.send('Hello world!');
-  };
-
-  app.route('/api/user')
-    .post(addUser)
-    .get(getUser);
+  app.get('/api/profiles', app.isAdmin, getProfiles);
 };
